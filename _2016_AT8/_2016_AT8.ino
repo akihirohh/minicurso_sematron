@@ -8,7 +8,7 @@ to ground. The third connects to a digital i/o pin (here pin 7)
 which reads the button's state
 */
 
-#define PUSHBUTTON 12
+#define PUSHBUTTON 7
 
 void setup() {
   pinMode(PUSHBUTTON,INPUT);
@@ -19,7 +19,7 @@ void setup() {
 
 void loop() {
   int button = digitalRead(PUSHBUTTON);
-  if(button)Serial.println("Pressione-me!");
-  else Serial.println("Pressionado!");
+  if(button)Serial.println("Pressionado!");
+  else Serial.println("Pressione-me!");
   
 }

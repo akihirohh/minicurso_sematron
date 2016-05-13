@@ -1,4 +1,4 @@
-#define RED_LED 9
+#define RED_LED 11
 #define GREEN_LED 6
 unsigned long start, prev;
 int ledState = LOW;

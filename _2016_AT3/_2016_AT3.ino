@@ -12,6 +12,6 @@ void loop() {
   Serial.print(cur-start);
   Serial.print("\t\t");
   Serial.println(leitura);
-  delay(1000);
-  //while(millis()-cur<1000); 
+  //delay(1000);
+  while(millis()-cur<1000); 
 }
