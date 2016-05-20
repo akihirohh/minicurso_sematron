@@ -1,29 +1,21 @@
-#define RED_LED 9
-#define GREEN_LED 6
-#define PUSHBUTTON 12
+#define POT A0
 
 void setup() {
-  pinMode(RED_LED,OUTPUT);
-  pinMode(GREEN_LED,OUTPUT);
-  pinMode(PUSHBUTTON, INPUT);
   Serial.begin(9600);
-  Serial.println("PUSHBUTTON + 2 LEDs");
+  Serial.println("Potenciometro: leitura analogica");
   delay(1000);
 }
 
+int previousReading;
+
 void loop() {
-  int button;
-  button = digitalRead(PUSHBUTTON);
-  if(button==LOW){
-    Serial.print(button);
-    Serial.println("\tVermelho!");
-    digitalWrite(GREEN_LED,LOW);
-    digitalWrite(RED_LED,LOW);
+  int reading= 0;  
+  reading = analogRead(POT);
+  if(abs(previousReading-reading)>2)
+  {
+    Serial.print("\t\t");
+    Serial.println(reading);
   }
-  else{
-    Serial.print(button);
-    Serial.println("\tVerde!");
-    digitalWrite(GREEN_LED,HIGH);
-    digitalWrite(RED_LED,HIGH);
-  }  
+  previousReading = reading; 
+  delay(1);
 }

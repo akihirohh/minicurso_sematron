@@ -1,25 +1,31 @@
-/*
-From https://www.arduino.cc/en/Tutorial/Pushbutton
-We connect three wires to the Arduino board. The first 
-goes from one leg of the pushbutton through a pull-up 
-resistor (here 2.2 KOhms) to the 5 volt supply. The 
-second goes from the corresponding leg of the pushbutton 
-to ground. The third connects to a digital i/o pin (here pin 7)
-which reads the button's state
-*/
-
-#define PUSHBUTTON 7
+#define RED_LED 11         //pin9 -> led -> R -> 5V
+#define GREEN_LED 6       //pin6 -> R -> led -> GND 
+#define PUSHBUTTON 12    //pin12 -> PUSHBUTTON -> GND
 
 void setup() {
-  pinMode(PUSHBUTTON,INPUT);
+  // put your setup code here, to run once:
+  pinMode(RED_LED,OUTPUT);
+  pinMode(GREEN_LED,OUTPUT);
+  pinMode(PUSHBUTTON, INPUT_PULLUP);
   Serial.begin(9600);
-  Serial.println("PUSHBUTTON");
+  Serial.println("PUSHBUTTON + 2 LEDs");
   delay(1000);
 }
 
 void loop() {
-  int button = digitalRead(PUSHBUTTON);
-  if(button)Serial.println("Pressionado!");
-  else Serial.println("Pressione-me!");
-  
+  // put your main code here, to run repeatedly:
+  int button;
+  button = digitalRead(PUSHBUTTON);
+  if(button==LOW){
+    Serial.print(button);
+    Serial.println("\tVermelho!");
+    digitalWrite(GREEN_LED,HIGH);
+    digitalWrite(RED_LED,LOW);
+  }
+  else{
+    Serial.print(button);
+    Serial.println("\tVerde!");
+    digitalWrite(GREEN_LED,LOW);
+    digitalWrite(RED_LED,HIGH);
+  }  
 }

@@ -1,9 +1,9 @@
-#define RED_LED 9
+#define RED_LED 11
 #define GREEN_LED 6
 unsigned long start, prev;
 int ledState = LOW;
 
-void setup
+void setup() {
   pinMode(RED_LED,OUTPUT);
   pinMode(GREEN_LED,OUTPUT);
   Serial.begin(9600);
@@ -13,22 +13,16 @@ void setup
 }
 
 void loop() {
-  if(millis() - prev > 1500){
-    prev = millis();
-    if(ledState==LOW){
-      digitalWrite(GREEN_LED,HIGH);
-      digitalWrite(RED_LED,HIGH);
-      Serial.print(prev - start);
-      Serial.println("\t\tHIGH");
-      ledState = HIGH;
-    }
-    else{
-      digitalWrite(GREEN_LED,LOW);
-      digitalWrite(RED_LED,LOW);
-      Serial.print(prev - start);
-      Serial.println("\t\tLOW");
-      ledState = LOW;
-    }
+  for(int i=0; i<256;i+=10){
+    analogWrite(GREEN_LED,i);
+    analogWrite(RED_LED,255-i);
+    Serial.println(i);
+    delay(50);
   }
-  Serial.println("Still running...");  
+  for(int i=255; i>0;i-=10){
+    analogWrite(GREEN_LED,255-i);
+    analogWrite(RED_LED,i);
+    Serial.println(i);
+    delay(50);
+  }  
 }
